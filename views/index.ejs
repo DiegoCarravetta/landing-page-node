@@ -30,7 +30,8 @@
 
     <header>
         <article>
-            <h1> Blue EdTech </h1>
+            <!-- após criar a variável título no index.js, eu uso ela no h1 -->
+            <h1> <%= titulo %> </h1>
 
             <p> Usar a força revolucionária da tecnologia para conectar pessoas e expandir horizontes com metodologias e ensino inovador. Este é o nosso propósito, e é por isso que antes de uma escola de tecnologia da informação, somos impulsionadores. </p>
         </article>
@@ -46,13 +47,21 @@
                 <img src = "/img/curos.png" alt = "">
             </article>
 
-            <article>
+            <article id = "content">
                 <h3> Desenvolvimento de Software </h3>
 
                 <ul>
-                    <li> Enhenharia de dados </li>
+                    <% devList.forEach (item => { %>
+                        <li> <%= item %> </li>
+                    <% }) %>
+                </ul>
 
-                    <li> Ciência de dados </li>
+                <h3> Analytics </h3>
+
+                <ul>
+                    <% analyticsList.forEach (item => { %>
+                        <li> <%= item %> </li>
+                    <% }) %>
                 </ul>
 
                 <a id = "increver" href = "#inscrever"> Inscrever-se agora! </a>

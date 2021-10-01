@@ -29,13 +29,17 @@ app.get (`/`, (req, res) => {
 });
 
 app.get (`/index`, (req, res) => {
+    const devList = [`Backend`, `Frontend`, `Fullstack`];
+    const analyticsList = [`Engenharia de Dados`, `Ciência de Dados`];
     // abre o arquivo "index.ejs" que está sendo renderizado
-    res.render (`index`);
+    // é necessário enviar dados do servidor .js para o .ejs
+    // preciso criar uma variável ("título") com valor ("Blue")
+    res.render (`index`, { titulo: `Blue`, devList: devList, analyticsList: analyticsList});
 });
 
 app.post (`/`, (req, res) => {
     // não vou receber nada na tela porque não pedi retorno do sistema
-    res.send (`POST recebe da homepage`)
+    res.send (`POST recebe da homepage`);
 });
 
 // adiciona a port e uma => para mostrar no console o caminho do servidor
