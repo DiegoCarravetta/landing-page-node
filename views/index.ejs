@@ -28,6 +28,12 @@
         </ul>
     </nav>
 
+    <% if (message != "") { %>
+        <section id = "message">
+            <p> <%= message %> </p> <spam id = "close"> &times; </spam>
+        </section>
+    <% } %>
+    
     <header>
         <article>
             <!-- após criar a variável título no index.js, eu uso ela no h1 -->
@@ -44,7 +50,7 @@
             <article id = "title">
                 <h2> Principais especialidades, linguagens e framewors do curso de Hard Skills: </h2>
 
-                <img src = "/img/curos.png" alt = "">
+                <img src = "/img/cursos.png" alt = "">
             </article>
 
             <article id = "content">
@@ -72,7 +78,7 @@
     <section>
         <h2> Inscrever-se! </h2>
 
-        <form action = "">
+        <form action = "/subscription" method = "POST">
             <div>
                 <label for = "nome"> Nome: </label>
 
@@ -92,5 +98,7 @@
     <footer>
         <p> < The futere is blue /> <a href = "https://blueedtech.com.br/" target = "_blank"> BlueEdtech </a></p>
     </footer>
+
+    <script src = "/js/script.js"> </script>
 </body>
 </html>

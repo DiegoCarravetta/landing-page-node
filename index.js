@@ -1,49 +1,35 @@
-// aqui estou importando o módulo express para o arquivo
 const express = require (`express`);
-// para utilizar arquivos estáticos, preciso importar a lib "path"
 const path = require (`path`);
 
-// aqui estou instanciando uma referencia do express no projeto
 const app = express ();
-// crio uma variável para armazenar a porta do servidor
 const port = 3000;
 
-// serve para dizer o código qual o "motor de visualização" (view engine)
+let message = "";
+
 app.set (`view engine`, `ejs`);
-// diz qual pasta irá guardar os arquivos estáticos
-// estou dizendo para o app usar o método express.static
-// uso o método "path.join" para juntar a pasta raiz "__dirname" e a pasta que guarda os arquivos "public"
 app.use (express.static (path.join (__dirname, `public`)));
+app.use (express.urlencoded ());
 
-// rota principal que recebe uma função com dois parâmetros
-// parâmetro req de requisição e parâmtro res de resposta
-// em vez de escrever "function", coloco os parâmetros e depois o "arrow function" =>
-// app é uma instância do express
-// get é o método de requisição
-// `/` é o caminho no servidor
-// req, res é a função executada quando a rota é correspondida
-// app.METHOD(PATH, HANDLER)
 app.get (`/`, (req, res) => {
-    // responde a requisição da rota com um texto
-    res.send (`Hellow World`);
-});
-
-app.get (`/index`, (req, res) => {
     const devList = [`Backend`, `Frontend`, `Fullstack`];
     const analyticsList = [`Engenharia de Dados`, `Ciência de Dados`];
-    // abre o arquivo "index.ejs" que está sendo renderizado
-    // é necessário enviar dados do servidor .js para o .ejs
-    // preciso criar uma variável ("título") com valor ("Blue")
-    res.render (`index`, { titulo: `Blue`, devList: devList, analyticsList: analyticsList});
+
+    setTimeout ( () => {
+        message = ``;
+    }, 1000);
+
+    res.render (`index`, {
+        titulo: `Blue`,
+        devList: devList,
+        analyticsList: analyticsList,
+        message,
+    });
 });
 
-app.post (`/`, (req, res) => {
-    // não vou receber nada na tela porque não pedi retorno do sistema
-    res.send (`POST recebe da homepage`);
+app.post (`/subscription`, (req, res) => {
+    const {nome, email} = req.body;
+    message = `Parabéns ${nome}, sua inscrição foi criada com sucesso. Um e-mail foi enviado para ${email}.`;
+    res.redirect (`/`);
 });
 
-// adiciona a port e uma => para mostrar no console o caminho do servidor
-// depois de renderisar a página ejs, coloco um "/index" depois da variável, para abrir de cara no caminho correto
-app.listen (port, () => console.log (`O servidor está rodando em http://localhost:${port}/index`));
-
-// exemplos de roteamentos: https://expressjs.com/pt-br/starter/basic-routing.html
+app.listen (port, () => console.log (`O servidor está rodando em http://localhost:${port}`));
